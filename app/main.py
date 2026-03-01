@@ -8,9 +8,10 @@ app.include_router(diagram.router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://hobby-nextjs.onrender.com/"],
+    allow_origins=["https://hobby-nextjs.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 
 )
+
