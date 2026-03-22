@@ -15,14 +15,14 @@ app.include_router(diagram.router, prefix="/api")
 _cors_origins = [
     o.strip()
     for o in os.environ.get(
-        "CORS_ORIGINS", "http://localhost:3000"
+        "CORS_ORIGINS", "https://hobby-nextjs.onrender.com"
     ).split(",")
     if o.strip()
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_cors_origins or ["http://localhost:3000"],
+    allow_origins=_cors_origins or ["https://hobby-nextjs.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
