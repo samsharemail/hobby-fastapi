@@ -1,3 +1,9 @@
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from fastapi import FastAPI
 from app.routes import diagram
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,12 +12,18 @@ app = FastAPI(title="CodeFlow AI")
 
 app.include_router(diagram.router, prefix="/api")
 
+_cors_origins = [
+    o.strip()
+    for o in os.environ.get(
+        "CORS_ORIGINS", "http://localhost:3000"
+    ).split(",")
+    if o.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://hobby-nextjs.onrender.com"],
+    allow_origins=_cors_origins or ["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-
 )
-
